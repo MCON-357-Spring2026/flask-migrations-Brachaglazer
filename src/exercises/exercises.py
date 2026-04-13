@@ -109,7 +109,7 @@ def get_student_grades(student_id: int) -> list[Grade]:
         Grade.query.join(Assignment)
         .filter(Grade.student_id == student_id)
         .order_by(Assignment.title)
-        .all()
+        .all()  # without .all() a query method will be returned, not a list of grades
     )
 
 
