@@ -60,7 +60,11 @@ def create_assignment():
     title = data.get("title")
     max_score = data.get("max_score")
     due_date_string = data.get("due_date")
-    parsed_date = date.fromisoformat(due_date_string)
+
+    try:
+        parsed_date = date.fromisoformat(due_date_string)
+    except Exception:
+        return jsonify({"error": "invalid date"}), 400
 
     if not title or max_score is None:
         return jsonify({"error": "title and max_score are required"}), 400
